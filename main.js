@@ -4,14 +4,18 @@ var email = document.getElementById("email");
 let idValue=document.getElementById("hidden");
 
 var list = document.getElementById("appointments")
+
+var editbtn=document.getElementById('edit');
+
 var submit = document.getElementById("form");
 
 window.addEventListener('DOMContentLoaded', getAppointment);
 list.addEventListener('click', DeleteAppointment)
 list.addEventListener('click',editAppointment)
+list.addEventListener('click',updateAppointment)
 
 function getAppointment() {
-    axios.get('https://crudcrud.com/api/a0b055c252d34ae7b39afcf4e3ae6c45/appointment')
+    axios.get('https://crudcrud.com/api/5144e51e89f8409db3fde77f49c9681b/appointment')
         .then((response) => {
 
             response.data.forEach(element => {
@@ -84,12 +88,12 @@ function storingToLocalStorage(e) {
 
 function post(obj) {
 
-    axios.post("https://crudcrud.com/api/a0b055c252d34ae7b39afcf4e3ae6c45/appointment", obj)
+    axios.post("https://crudcrud.com/api/5144e51e89f8409db3fde77f49c9681b/appointment", obj)
         .then((response) => {
             let output = `<li id="${response.data._id}">
              ${response.data.name} ${response.data.email}
             <button class="delete">delete</button>
-            <button class="edit">edit</button>
+            <button class="edit" onclick=editUserDetails('${user.email}','${user.name}','${user._id}')>edit</button>
         </li>`;
 
                 list.innerHTML += output;
@@ -109,7 +113,7 @@ function DeleteAppointment(e) {
         const item =e.target.parentElement;
         const id = item.getAttribute('id');
 
-        axios.delete(`https://crudcrud.com/api/a0b055c252d34ae7b39afcf4e3ae6c45/appointment/${id}`)
+        axios.delete(`https://crudcrud.com/api/5144e51e89f8409db3fde77f49c9681b/appointment/${id}`)
             .then((response) => {
                 item.remove();
             }).catch(err => console.log(err));
@@ -124,7 +128,7 @@ function editAppointment(e) {
         const item =e.target.parentElement;
         const id = item.getAttribute('id');
 
-        axios.get(`https://crudcrud.com/api/a0b055c252d34ae7b39afcf4e3ae6c45/appointment/${id}`)
+        axios.get(`https://crudcrud.com/api/5144e51e89f8409db3fde77f49c9681b/appointment/${id}`)
             .then((response) => {
               userName.value=response.data.name;
               email.value=response.data.email;
@@ -133,4 +137,11 @@ function editAppointment(e) {
     }
 }
 
+function editUserDetails(userName,email){
+  document.getElementById("email").value=email;
+  document.getElementById("name").value=userName    
+    // }
+    DeleteAppointment(e);
 
+   
+}
