@@ -118,21 +118,4 @@ function  editUserDetails(e) {
     //console.log(userData);
    list.removeChild(e.target.parentElement);
 
-//    axios.get('https://crudcrud.com/api/9c896d0793b5499ebee22b039d2d7ce1/appointment')  
-//     .then(res => {
-//       res.data.forEach(e => {
-//         if(e.name === userName) {
-//           if(editor) {
-//             uName.value = e.name;
-//             email.value = e.email;
-//           }
-//           axios.delete(`https://crudcrud.com/api/9c896d0793b5499ebee22b039d2d7ce1/appointment/${e._id}`)
-//             .then(e => console.log(e))
-//             .catch(e => alert(e));
-//         }
-//       });
-//     })
-//     .catch(e => alert(e));
 }
-
-
